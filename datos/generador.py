@@ -1,18 +1,16 @@
 import csv
 import random
 import os
+import importlib
 
 # importar kagglehub para descarga automatica
 try:
-    import kagglehub
-    from kagglehub import KaggleDatasetAdapter
+    kagglehub = importlib.import_module("kagglehub")
+    KaggleDatasetAdapter = kagglehub.KaggleDatasetAdapter
     USAR_KAGGLEHUB = True
 except ImportError:
     USAR_KAGGLEHUB = False
 
-print("-------------------------------------------------------------------------")
-print("INICIANDO GENERACIÓN DE DATASEED PARA TEORÍA DE AUTÓMATAS")
-print("-------------------------------------------------------------------------")
 
 # 1. Obtener IDs reales desde Kaggle
 ids_reales = []
@@ -90,7 +88,7 @@ for i in range(1, total_pedidos + 1):
     id_sesion = f"S-{ids_reales[(i-1) % len(ids_reales)]}" if ids_reales else f"S-{1000+i:04d}"
     actor = actores_reales[(i-1) % len(actores_reales)] if actores_reales else f"USR-{random.randint(100, 999)}"
     
-    # Control de porcentaje de anomalias (15% a 20%)[cite: 15]
+    # Control de porcentaje de anomalias (15% a 20%)
     prob = random.random()
     if prob < 0.18: 
         patron_inyectado = random.choice(["AA", "SIN_S", "SC"])
@@ -102,7 +100,7 @@ for i in range(1, total_pedidos + 1):
     else:
         secuencia = ["P", "A", "R", "S", "E"]
         
-    # Inyectar eventos irrelevantes 'L' (CALIFICAR) para simular bucles
+    # Inyectar eventos irrelevantes 'L' (CALIFICAR) 
     secuencia_final = []
     for s in secuencia:
         secuencia_final.append(s)
@@ -119,7 +117,7 @@ for i in range(1, total_pedidos + 1):
         "tipo_patron": tipo_patron
     })
 
-# Separar en archivos de validación y de prueba[cite: 15]
+# Separar en archivos de validación y de prueba
 val_sesiones = sesiones_procesadas[:total_sesiones_val]
 prueba_sesiones = sesiones_procesadas[total_sesiones_val:]
 
@@ -137,7 +135,7 @@ with open("validacion.csv", mode="w", newline="", encoding="utf-8") as f:
             id_evento += 1
             writer.writerow([id_evento, f"2026-10-20 10:{idx:02d}:15", s["id_sesion"], s["actor"], DICCIONARIO_ALFABETO[sim], sim, s["etiqueta"], s["tipo_patron"]])
 
-# 2. Escritura de 'prueba.csv' y 'prueba_clave.csv'[cite: 15]
+# 2. Escritura de 'prueba.csv' y 'prueba_clave.csv'
 with open("prueba.csv", mode="w", newline="", encoding="utf-8") as f_p, open("prueba_clave.csv", mode="w", newline="", encoding="utf-8") as f_c:
     writer_p = csv.writer(f_p)
     writer_c = csv.writer(f_c)
@@ -151,7 +149,6 @@ with open("prueba.csv", mode="w", newline="", encoding="utf-8") as f_p, open("pr
             writer_p.writerow([id_evento, f"2026-10-20 11:{idx:02d}:30", s["id_sesion"], s["actor"], DICCIONARIO_ALFABETO[sim], sim])
 
 print("-------------------------------------------------------------------------")
-print("¡ÉXITO TOTAL! Archivos generados en la carpeta actual:")
 print(" - validacion.csv")
 print(" - prueba.csv")
 print(" - prueba_clave.csv")
