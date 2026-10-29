@@ -9,27 +9,27 @@ ABP sobre un monitor de secuencias en Python respaldado por Autómatas Finitos (
 * **Kevin Joel Nole Cabrera**
 * **Cristian Abraham Tomalá González** 
 * **Isabel Katherine Morocho Marizaca**
-* **Docente:** Ing. Genoveva Suing[cite: 2]
+* **Docente:** Ing. Genoveva Suing
 
 ---
 
 ## 📋 Descripción del Modelo Formal
 
-El sistema procesa transacciones basadas en un alfabeto de 7 eventos ($\Sigma$)[cite: 3]:
+El sistema procesa transacciones basadas en un alfabeto de 7 eventos ($\Sigma$):
 
-* **P** - PEDIR: El cliente solicita el pedido[cite: 3].
-* **A** - PAGAR: El cliente efectúa el pago[cite: 3].
-* **R** - PREPARAR: El restaurante acepta y prepara la comida[cite: 3].
-* **S** - ASIGNAR: Se asigna un repartidor al pedido[cite: 3].
-* **E** - ENTREGAR: El repartidor entrega el pedido[cite: 3].
-* **C** - CANCELAR: El pedido es cancelado[cite: 3].
-* **L** - CALIFICAR: El cliente registra una reseña[cite: 3].
+* **P** - PEDIR: El cliente solicita el pedido
+* **A** - PAGAR: El cliente efectúa el pago.
+* **R** - PREPARAR: El restaurante acepta y prepara la comida.
+* **S** - ASIGNAR: Se asigna un repartidor al pedido.
+* **E** - ENTREGAR: El repartidor entrega el pedido.
+* **C** - CANCELAR: El pedido es cancelado.
+* **L** - CALIFICAR: El cliente registra una reseña.
 
 ### Patrones Evaluados:
 1. **P1 (Anomalía - Doble pago consecutivo):** Detecta dos cobros/pagos consecutivos (AA) sin evento intermedio.
-2. **P2 (Anomalía - Entrega sin asignación previa):** Detecta entregas (E) sin que se haya asignado un repartidor (S) previamente[cite: 4].
-3. **P3 (Validación - Flujo correcto):** Valida la secuencia correcta de pago, preparación y asignación (A-R-S)[cite: 4].
-4. **P4 (Anomalía - Cancelación inmediata tras asignación):** Detecta cuando se asigna un repartidor y se cancela de inmediato (SC)[cite: 4].
+2. **P2 (Anomalía - Entrega sin asignación previa):** Detecta entregas (E) sin que se haya asignado un repartidor (S) previamente.
+3. **P3 (Validación - Flujo correcto):** Valida la secuencia correcta de pago, preparación y asignación (A-R-S).
+4. **P4 (Anomalía - Cancelación inmediata tras asignación):** Detecta cuando se asigna un repartidor y se cancela de inmediato (SC).
 
 ---
 
@@ -41,7 +41,7 @@ Puedes organizar tus archivos del proyecto (scripts de Python, archivos CSV de p
 PROYECTO_AUTOMATAS_U1-AMNT/
 │
 ├── datos/
-│   └── prueba.csv              # Dataset de sesiones extraídas de Kaggle[cite: 4, 5]
+│   └── prueba.csv              # Dataset de sesiones extraídas de Kaggle
 ├── src/
 │   └── monitor.py              # Script principal en Python para el monitoreo
 ├── jflap/
@@ -49,8 +49,8 @@ PROYECTO_AUTOMATAS_U1-AMNT/
 └── README.md
 
 ## ⚙️ Requisitos
-Lenguaje: Python 3.x[cite: 3]
+Lenguaje: Python 3.x
 
 Herramientas de Diseño: JFLAP para la construcción de AFND, subconjuntos, AFD mínimo y minimización.
 
-Entorno de desarrollo: Visual Studio Code[cite: 4].
+Entorno de desarrollo: Visual Studio Code.
